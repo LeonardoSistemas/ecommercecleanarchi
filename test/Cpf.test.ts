@@ -14,9 +14,3 @@ test('Deve testar um cpf inválido com os dígitos iguais', () => {
 test('Deve testar um cpf inválido com os dígitos diferentes', () => {
     expect(() => new Cpf("123.456.789-99")).toThrow(new Error("CPF Inválido"));
 })
-
-test('Deve testar um cpf inválido com os dígitos iguais', () => {
-
-    const cpf = new Cpf("");
-    expect(cpf.getValue()).toBeFalsy();
-})
