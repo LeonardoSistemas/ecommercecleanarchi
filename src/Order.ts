@@ -18,12 +18,20 @@ export default class Order {
 
     }
 
+    addCoupon(coupon: Coupon) {
+        this.coupon = coupon;
+        const atualdate = new Date();
+        return atualdate < new Date(this.coupon.expirationdate) ? true : false;
+    }
+
     getTotal() {
         let total = 0;
         for (const orderItem of this.orderItems) {
             total += orderItem.getTotal();
         }
-        if (this.coupon?.addCoupon()) {
+        
+        if (this.coupon) {
+            
             total -= ((total * this.coupon.percentage) / 100);
         }
         return total;

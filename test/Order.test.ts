@@ -22,7 +22,7 @@ test("Deve criar um pedido com 3 itens com cupom de desconto válido", function 
     order.addItem(new Item(3, "Instrumentos Musicais", "Cabo", 30), 3);
     let expirationdate = new Date();
     expirationdate.setDate(expirationdate.getDate() + 1);
-    const coupon = new Coupon("VALE20", 20, expirationdate);
+    const coupon = new Coupon("VALE20", 20, expirationdate);    
     order.addCoupon(coupon);
     const total = order.getTotal();
     expect(total).toBe(4872);
