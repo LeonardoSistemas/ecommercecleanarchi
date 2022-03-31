@@ -47,9 +47,10 @@ test("Deve criar um pedido com 3 itens e calcular o frete", function () {
     expect(total).toBe(6350);
 })
 
-/*test("Deve criar um pedido com 3 itens e calcular o frete minimo", function () {
-    const order = new Order("935.411.347-80");
-    order.addItem(new Item(3,"Instrumentos Musicais", "Cabo", 30, new Dimension(10,10,10), 0.9), 1);
-    const total = order.getTotal();
-    expect(total).toBe(40);
-})*/
+test("Deve criar um pedido e calcular o código", function () {
+    const order = new Order("935.411.347-80", new Date("2022-03-01T10:00:00"), 1);
+    order.addItem(new Item(1,"Instrumentos Musicais", "Guitarra", 1000), 1);
+    order.addItem(new Item(2,"Instrumentos Musicais", "Amplificador", 5000), 1);
+    order.addItem(new Item(3,"Instrumentos Musicais", "Cabo", 30),3);
+    expect(order.code.value).toBe("202200000001");
+})
