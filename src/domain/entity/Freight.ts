@@ -8,11 +8,11 @@ export default class Freight {
         this.total = 0;
     }
 
-    addItem(item: Item, quantity: number) {
+    addItem(item: Item, quantity: number) {        
         this.total += (item.getVolume() * this.DISTANCE * (item.getDensity() / 100)) * quantity;
     }
 
-    getTotal(){
+    getTotal(){        
         return this.total > 0 && this.total < this.FREIGHTMIN ? this.FREIGHTMIN : this.total;
     }
 }
