@@ -7,6 +7,9 @@ export default class OrderRepositoryMemory implements OrderRepository {
     constructor() {
         this.orders = [];
     }
+    async getAll(): Promise<Order[]> {
+        return this.orders;
+    }
 
     async getByCode(code: string): Promise<Order> {
         const order = this.orders.find(order => order.code.value === code);
