@@ -6,6 +6,6 @@ import Router from "./infra/http/Router";
 const connection = new PostgreSQLConnectionAdapter();
 const repositoryFactory = new DatabaseRepositoryFactory(connection);
 const http = new ExpressHttp();
-const router = new Router(http, repositoryFactory);
+const router = new Router(http, repositoryFactory, connection);
 router.init();
 http.listen(3002);
