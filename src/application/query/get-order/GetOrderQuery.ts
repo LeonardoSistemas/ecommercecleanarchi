@@ -1,5 +1,5 @@
-import Connection from "../../infra/database/Connection";
-import GetOrderOutput from "../usercase/get-order/GetOrderOutput";
+import Connection from "../../../infra/database/Connection";
+import GetOrderOutput from "../../usercase/get-order/GetOrderOutput";
 
 export default class GetOrderQuery {
 

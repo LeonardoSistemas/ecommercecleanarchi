@@ -15,14 +15,14 @@ beforeEach(async function () {
 	await orderRepository.clean();
 });
 
-test.skip("Deve testar a API", async function () {
+test("Deve testar a API GET /orders", async function () {
 	const placeOrder = new PlaceOrder(repositoryFactory);
 	const input = {
 		cpf: "935.411.347-80",
 		orderItems: [
-			{ idItem: 1, quantity: 1},
-			{ idItem: 2, quantity: 1},
-			{ idItem: 3, quantity: 3}
+			{ idItem: 1, quantity: 1 },
+			{ idItem: 2, quantity: 1 },
+			{ idItem: 3, quantity: 3 }
 		],
 		coupon: "VALE20",
 		issueDate: new Date("2021-03-01T10:00:00")
@@ -38,6 +38,33 @@ test.skip("Deve testar a API", async function () {
 	expect(orders).toHaveLength(3);
 });
 
+test("Deve testar a API /items", async function () {
+	const response = await axios({
+		url: "http://localhost:3002/items",
+		method: "get"
+	});
+	const items = response.data;
+	expect(items).toHaveLength(3);
+});
+
 afterEach(async function () {
 	await connection.close();
+});
+
+test("Deve testar a API POST /orders", async function () {
+	const response = await axios({
+		url: "http://localhost:3002/orders",
+		method: "post",
+		data: {
+			cpf: "935.411.347-80",
+			orderItems: [
+				{ idItem: 1, quantity: 1 },
+				{ idItem: 2, quantity: 1 },
+				{ idItem: 3, quantity: 3 }
+			],
+			issueDate: new Date("2022-03-01T10:00:00")
+		}
+	});
+	const output = response.data;
+	expect(output.code).toBe("202200000001");
 });
