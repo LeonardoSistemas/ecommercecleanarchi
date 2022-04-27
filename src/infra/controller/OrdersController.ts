@@ -1,5 +1,8 @@
 import GetOrderOutput from "../../application/usercase/get-order/GetOrderOutput";
 import GetOrders from "../../application/usercase/get-orders/GetOrders";
+import PlaceOrder from "../../application/usercase/place-order/PlaceOrder";
+import PlaceOrderInput from "../../application/usercase/place-order/PlaceOrderInput";
+import PlaceOrderOutput from "../../application/usercase/place-order/PlaceOrderOutput";
 import RepositoryFactory from "../../domain/factory/RepositoryFactory";
 
 export default class OrdersController {
@@ -10,6 +13,13 @@ export default class OrdersController {
 	async getOrders () : Promise<GetOrderOutput[]> {
 		const getOrders = new GetOrders(this.repositoryFactory);
 		const output = await getOrders.execute();
+		return output;
+	}
+
+	async placeOrder (input : PlaceOrderInput) : Promise<PlaceOrderOutput>{
+		const placeOrder = new PlaceOrder(this.repositoryFactory);
+		input.issueDate = (input.issueDate) ? new Date(input.issueDate) : new Date();
+		const output = await placeOrder.execute(input);
 		return output;
 	}
 }
